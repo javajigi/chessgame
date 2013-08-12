@@ -1,6 +1,5 @@
 package chess;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pieces.PieceOperations;
@@ -11,11 +10,8 @@ public class Board {
 	public static final int ROW_SIZE = 8;
 	public static final int COLUMN_SIZE = 8;
 
-	List<Rank> ranks = new ArrayList<Rank>();
+	List<Rank> ranks;
 
-	Board() {
-	}
-	
 	Board(Initializable initializable) {
 		this.ranks = initializable.initialize();
 	}
