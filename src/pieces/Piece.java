@@ -3,7 +3,7 @@ package pieces;
 import java.util.List;
 
 
-public abstract class Piece {
+public abstract class Piece implements PieceOperations {
 	public enum Color {
 		WHITE,
 		BLACK,
@@ -30,9 +30,9 @@ public abstract class Piece {
 		}
 	}
 	
-	private Color color;
+	protected Color color;
 	private Type type;
-	private Position position;
+	protected Position position;
 	
 	Piece(Color color, Type type, Position position) {
 		this.color = color;
@@ -40,6 +40,7 @@ public abstract class Piece {
 		this.position = position;
 	}
 	
+	@Override
 	public char getSymbol() {
 		if (isBlack()) {
 			return Character.toUpperCase(type.getSymbol());
@@ -55,6 +56,7 @@ public abstract class Piece {
         return false;
     }
 
+    
     boolean isBlack() {
         if (Color.BLACK == color) {
             return true;
@@ -67,16 +69,29 @@ public abstract class Piece {
 		return this.color == color ? true : false;
 	}
 
+	@Override
 	public Piece leave() {
 		return new Empty(Color.NOCOLOR, this.position);
 	}
 	
+	@Override
 	public Piece move(Position target) {
 		this.position = target;
 		return this;
 	}
 	
-	abstract List<Position> getPossibleMoves();
+	@Override
+	public abstract List<Position> getPossibleMoves();
+
+	@Override
+	public boolean isEmpty() {
+		return type == Type.EMPTY;
+	}
+	
+	@Override
+	public Color getColor() {
+		return color;
+	}
 	
 	@Override
 	public int hashCode() {

@@ -50,7 +50,7 @@ public class Position {
 		return positions;
 	}
 	
-	boolean isValid() {
+	public boolean isValid() {
 		if ( y < 0 || y >= Board.ROW_SIZE) {
 			return false;
 		}
@@ -86,12 +86,4 @@ public class Position {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Position [x=" + x + ", y=" + y + "]";
-	}
-
-
-
 }

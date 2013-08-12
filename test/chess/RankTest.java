@@ -1,12 +1,9 @@
 package chess;
 
 import junit.framework.TestCase;
-import pieces.King;
-import pieces.Pawn;
-import pieces.Piece;
-import pieces.Piece.Color;
+import pieces.PieceFactory;
+import pieces.PieceOperations;
 import pieces.Position;
-import pieces.Queen;
 
 public class RankTest extends TestCase {
 	static final String EMPTY_RANK = "........";
@@ -51,10 +48,10 @@ public class RankTest extends TestCase {
 	public void testFindPiece() throws Exception {
 		rank.initializeWhiteExceptPawn();
 		Position position = new Position("d1");
-		assertEquals(new Queen(Color.WHITE, position), rank.findPiece(position));
+		assertEquals(PieceFactory.createWhiteQueen(position), rank.findPiece(position));
 		
 		position = new Position("e1");
-		assertEquals(new King(Color.WHITE, position), rank.findPiece(position));
+		assertEquals(PieceFactory.createWhiteKing(position), rank.findPiece(position));
 	}
 	
 	public void testMove() throws Exception {
@@ -63,10 +60,10 @@ public class RankTest extends TestCase {
 		Position source = new Position("d2");
 		Position target = new Position("d3");
 		
-		Piece sourcePiece = rank.findPiece(source);
-		assertEquals(new Pawn(Color.WHITE, source), sourcePiece);
+		PieceOperations sourcePiece = rank.findPiece(source);
+		assertEquals(PieceFactory.createWhitePawn(source), sourcePiece);
 		
-		Piece targetPiece = rank.move(sourcePiece, target);
-		assertEquals(new Pawn(Color.WHITE, target), targetPiece);
+		PieceOperations targetPiece = rank.move(sourcePiece, target);
+		assertEquals(PieceFactory.createWhitePawn(target), targetPiece);
 	}
 }

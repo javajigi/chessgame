@@ -3,19 +3,13 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
-import pieces.Bishop;
-import pieces.Empty;
-import pieces.King;
-import pieces.Knight;
-import pieces.Pawn;
 import pieces.Piece;
-import pieces.Piece.Color;
+import pieces.PieceFactory;
+import pieces.PieceOperations;
 import pieces.Position;
-import pieces.Queen;
-import pieces.Rook;
 
 public class Rank {
-	private List<Piece> rank = new ArrayList<Piece>();
+	private List<PieceOperations> rank = new ArrayList<PieceOperations>();
 	
 	private int rankPosition;
 	
@@ -25,43 +19,43 @@ public class Rank {
 
 	void initializeEmpty() {
 		for (int i = 0; i < Board.COLUMN_SIZE; i++) {
-			rank.add( new Empty(Color.NOCOLOR, new Position(i, rankPosition)) );
+			rank.add( PieceFactory.noPiece(new Position(i, rankPosition)) );
 		}
 	}
 	
 	void initializeWhitePawn() {
 		for (int i = 0; i < Board.COLUMN_SIZE; i++) {
-			rank.add(new Pawn(Color.WHITE, new Position(i, rankPosition)) );
+			rank.add(PieceFactory.createWhitePawn(new Position(i, rankPosition)) );
 		}
 	}
 	
 	void initializeBlackPawn() {
 		for (int i = 0; i < Board.COLUMN_SIZE; i++) {
-			rank.add(new Pawn(Color.BLACK, new Position(i, rankPosition)) );
+			rank.add(PieceFactory.createBlackPawn(new Position(i, rankPosition)) );
 		}
 	}
 	
 	void initializeWhiteExceptPawn() {
-		rank.add(new Rook(Color.WHITE, new Position(0, rankPosition)) );
-		rank.add(new Knight(Color.WHITE, new Position(1, rankPosition)) );
-		rank.add(new Bishop(Color.WHITE, new Position(2, rankPosition)) );
-		rank.add(new Queen(Color.WHITE, new Position(3, rankPosition)) );
-		rank.add(new King(Color.WHITE, new Position(4, rankPosition)) );
-		rank.add(new Bishop(Color.WHITE, new Position(5, rankPosition)) );
-		rank.add(new Knight(Color.WHITE, new Position(6, rankPosition)) );
-		rank.add(new Rook(Color.WHITE, new Position(7, rankPosition)) );
+		rank.add(PieceFactory.createWhiteRook(new Position(0, rankPosition)) );
+		rank.add(PieceFactory.createWhiteKnight(new Position(1, rankPosition)) );
+		rank.add(PieceFactory.createWhiteBishop(new Position(2, rankPosition)) );
+		rank.add(PieceFactory.createWhiteQueen(new Position(3, rankPosition)) );
+		rank.add(PieceFactory.createWhiteKing(new Position(4, rankPosition)) );
+		rank.add(PieceFactory.createWhiteBishop(new Position(5, rankPosition)) );
+		rank.add(PieceFactory.createWhiteKnight(new Position(6, rankPosition)) );
+		rank.add(PieceFactory.createWhiteRook(new Position(7, rankPosition)) );
 	}
 	
 
 	void initializeBlackExceptPawn() {
-		rank.add(new Rook(Color.BLACK, new Position(0, rankPosition)) );
-		rank.add(new Knight(Color.BLACK, new Position(1, rankPosition)) );
-		rank.add(new Bishop(Color.BLACK, new Position(2, rankPosition)) );
-		rank.add(new Queen(Color.BLACK, new Position(3, rankPosition)) );
-		rank.add(new King(Color.BLACK, new Position(4, rankPosition)) );
-		rank.add(new Bishop(Color.BLACK, new Position(5, rankPosition)) );
-		rank.add(new Knight(Color.BLACK, new Position(6, rankPosition)) );
-		rank.add(new Rook(Color.BLACK, new Position(7, rankPosition)) );
+		rank.add(PieceFactory.createBlackRook(new Position(0, rankPosition)) );
+		rank.add(PieceFactory.createBlackKnight(new Position(1, rankPosition)) );
+		rank.add(PieceFactory.createBlackBishop(new Position(2, rankPosition)) );
+		rank.add(PieceFactory.createBlackQueen(new Position(3, rankPosition)) );
+		rank.add(PieceFactory.createBlackKing(new Position(4, rankPosition)) );
+		rank.add(PieceFactory.createBlackBishop(new Position(5, rankPosition)) );
+		rank.add(PieceFactory.createBlackKnight(new Position(6, rankPosition)) );
+		rank.add(PieceFactory.createBlackRook(new Position(7, rankPosition)) );
 	}
 
 	String generate() {
@@ -72,7 +66,7 @@ public class Rank {
 		return sb.toString();
 	}
 
-	Piece findPiece(Position position) {
+	PieceOperations findPiece(Position position) {
 		return rank.get(position.getX());
 	}
 
@@ -80,9 +74,9 @@ public class Rank {
 		rank.set(xPosition, targetPiece);
 	}
 
-	Piece move(Piece sourcePiece, Position target) {
+	PieceOperations move(PieceOperations sourcePiece, Position target) {
 		sourcePiece.move(target);
-		rank.set(target.getX(), sourcePiece);
+		rank.set(target.getX(), (Piece) sourcePiece);
 		return sourcePiece;
 	}
 }
