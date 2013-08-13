@@ -36,6 +36,10 @@ public class Position {
 		return this.y;
 	}
 	
+	public String getAxis() {
+		return "" + (char)(COLUMN_START_CHAR + x) + (y+1);
+	}
+	
 	Position move(Direction direction) {
 		return new Position(this.x + direction.getXDegree(), this.y + direction.getYDegree());
 	}

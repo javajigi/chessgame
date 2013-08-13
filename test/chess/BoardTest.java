@@ -32,22 +32,6 @@ public class BoardTest extends TestCase {
 		assertEquals(expected, board.generateBoard(new ConsoleGenerator()));
 	}
 	
-	public void testPrintHTML() throws Exception {
-		String expected = 
-				"<html>" + "<body>" +
-				RankTest.BLACK_EXCEPT_PAWN_RANK + Board.NEW_LINE +
-				RankTest.BLACK_PAWN_RANK + Board.NEW_LINE +
-				createEmptyRank() + 
-				createEmptyRank() + 
-				createEmptyRank() + 
-				createEmptyRank() +
-				RankTest.WHITE_PAWN_RANK + Board.NEW_LINE +
-				RankTest.WHITE_EXCEPT_PAWN_RANK + Board.NEW_LINE +
-				"</body>" + "</html>";
-		System.out.println(board.generateBoard(new HtmlGenerator()));
-		assertEquals(expected, board.generateBoard(new HtmlGenerator()));
-	}
-	
 	private String createEmptyRank() {
 		return RankTest.EMPTY_RANK + Board.NEW_LINE;
 	}

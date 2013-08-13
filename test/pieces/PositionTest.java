@@ -12,7 +12,13 @@ public class PositionTest extends TestCase {
 		assertEquals(4, position.getX());
 		assertEquals(1, position.getY());
 	}
-
+	
+	public void testGetAxis() throws Exception {
+		String axis = "a8";
+		Position position = new Position("a8");
+		assertEquals(axis, position.getAxis());
+	}
+	
 	public void testMoveOneRoom() throws Exception {
 		int startX = 4;
 		int startY = 5;

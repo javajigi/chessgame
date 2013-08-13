@@ -1,7 +1,15 @@
 $(function(){
+	var index = 0;
 
     $('#boards tr td').click(function() {
-      alert('Handler for .click() called.');
+      	var position = $(this).attr('id');
+      	var value = index % 2; 
+      	if ( value == 0 ) {
+      		$('#source').val(position);
+      	} else {
+      		$('#target').val(position);
+      	}
+      	index++;
     });
     
     $('#move').click(function() {

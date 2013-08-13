@@ -41,7 +41,7 @@ public class HtmlGenerator implements Generatable {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < Board.COLUMN_SIZE; i++) {
 			PieceOperations piece = rank.findPiece(i);
-			sb.append("<td width='15'>");
+			sb.append("<td width='15' id='" + piece.getPostion().getAxis() + "'>");
 			sb.append(piece.getSymbol());
 			sb.append("</td>");
 		}

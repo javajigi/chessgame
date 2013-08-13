@@ -10,7 +10,7 @@ class Pawn extends Piece {
 
 	@Override
 	public List<Position> getPossibleMoves() {
-		PositionController posCon = new PositionController(position);
+		PositionController posCon = new PositionController(getPostion());
 		List<Position> pawnMoves = new ArrayList<Position>();
 		if (color == Color.WHITE) {
 			pawnMoves = posCon.findsWhitePawnPositionAll();

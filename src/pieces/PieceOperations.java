@@ -6,8 +6,9 @@ import pieces.Piece.Color;
 
 public interface PieceOperations {
 	char getSymbol();
-	Piece leave();
-	Piece move(Position target);
+	PieceOperations leave();
+	PieceOperations move(Position target);
+	Position getPostion();
 	List<Position> getPossibleMoves();
 	boolean isEmpty();
 	Color getColor();

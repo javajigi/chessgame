@@ -32,7 +32,7 @@ public abstract class Piece implements PieceOperations {
 	
 	protected Color color;
 	private Type type;
-	protected Position position;
+	private Position position;
 	
 	Piece(Color color, Type type, Position position) {
 		this.color = color;
@@ -78,6 +78,11 @@ public abstract class Piece implements PieceOperations {
 	public Piece move(Position target) {
 		this.position = target;
 		return this;
+	}
+	
+	@Override
+	public Position getPostion() {
+		return this.position;
 	}
 	
 	@Override
