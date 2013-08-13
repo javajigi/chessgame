@@ -26,11 +26,11 @@ public class Board {
 		return rank.findPiece(position);
 	}
 
-	void movePiece(String source, String target) {
+	public void movePiece(String source, String target) {
 		movePiece(new Position(source), new Position(target));
 	}
 
-	void movePiece(Position source, Position target) {
+	public void movePiece(Position source, Position target) {
 		PieceOperations targetPiece = findPiece(source);
 		PieceOperations sourcePiece = targetPiece.leave();
 

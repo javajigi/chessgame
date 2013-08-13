@@ -49,20 +49,24 @@ public class RequestHandler extends Thread {
 			if (requestPath.startsWith("/js")) {
 				processJavaScript(dos, requestPath);
 			} else if (requestPath.startsWith("/move")) {
-				
-				
+				board.movePiece(request.getParameter("source"), request.getParameter("target"));
+				processChess(dos);
 			} else {
-				String html = board.generateBoard(new HtmlGenerator());
-				byte[] bytes = html.getBytes();
-				responseHtmlOk(dos, bytes.length);
-				dos.writeBytes("\r\n");
-				dos.write(bytes);
+				processChess(dos);
 			}
 
 			connection.close();
 		} catch (IOException e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
+	}
+
+	private void processChess(DataOutputStream dos) throws IOException {
+		String html = board.generateBoard(new HtmlGenerator());
+		byte[] bytes = html.getBytes();
+		responseHtmlOk(dos, bytes.length);
+		dos.writeBytes("\r\n");
+		dos.write(bytes);
 	}
 
 	private void processJavaScript(DataOutputStream dos, String requestPath)

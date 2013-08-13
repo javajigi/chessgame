@@ -16,7 +16,7 @@ public class HtmlGenerator implements Generatable {
 		sb.append("<body>" + Board.NEW_LINE);
 		sb.append("<table id='boards'>" + Board.NEW_LINE);
 		for (int i = Board.ROW_SIZE; i > 0; i--) {
-			sb.append("<tr>" + Board.NEW_LINE);
+			sb.append("<tr height='15'>" + Board.NEW_LINE);
 			sb.append(generateRank(ranks.get(i-1)) + Board.NEW_LINE);
 			sb.append("</tr>" + Board.NEW_LINE);
 		}
@@ -41,7 +41,7 @@ public class HtmlGenerator implements Generatable {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < Board.COLUMN_SIZE; i++) {
 			PieceOperations piece = rank.findPiece(i);
-			sb.append("<td>");
+			sb.append("<td width='15'>");
 			sb.append(piece.getSymbol());
 			sb.append("</td>");
 		}
