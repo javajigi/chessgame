@@ -65,9 +65,13 @@ public class Rank {
 		}
 		return sb.toString();
 	}
+	
+	PieceOperations findPiece(int index) {
+		return rank.get(index);
+	}
 
 	PieceOperations findPiece(Position position) {
-		return rank.get(position.getX());
+		return findPiece(position.getX());
 	}
 
 	void changePiece(int xPosition, Piece targetPiece) {
