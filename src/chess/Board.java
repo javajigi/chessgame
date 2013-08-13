@@ -12,7 +12,7 @@ public class Board {
 
 	List<Rank> ranks;
 
-	Board(Initializable initializable) {
+	public Board(Initializable initializable) {
 		this.ranks = initializable.initialize();
 	}
 
@@ -77,7 +77,7 @@ public class Board {
 		return sb.toString();
 	}
 
-	String generateBoard(Generatable generator) {
+	public String generateBoard(Generatable generator) {
 		return generator.generateBoard(ranks);
 	}
 }
