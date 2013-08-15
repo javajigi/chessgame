@@ -53,22 +53,32 @@ public class PositionController {
 		int whiteStartY = 1;
 		List<Position> positions = new ArrayList<Position>();
 		Position movedPosition = position.move(Direction.NORTH);
-		positions.add(movedPosition);
+		addPositionWhenIsValid(positions, movedPosition);
 		if (position.getY() == whiteStartY) {
 			positions.add(movedPosition.move(Direction.NORTH));
 		}
+		addPositionWhenIsValid(positions, position.move(Direction.NORTHEAST));
+		addPositionWhenIsValid(positions, position.move(Direction.NORTHWEST));
 		
 		return positions;
+	}
+	
+	private void addPositionWhenIsValid(List<Position> positions, Position position) {
+		if (position.isValid()) {
+			positions.add(position);
+		}
 	}
 	
 	public List<Position> findsBlackPawnPositionAll() {
 		int blackStartY = 6;
 		List<Position> positions = new ArrayList<Position>();
 		Position movedPosition = position.move(Direction.SOUTH);
-		positions.add(movedPosition);
+		addPositionWhenIsValid(positions, movedPosition);
 		if (position.getY() == blackStartY) {
 			positions.add(movedPosition.move(Direction.SOUTH));
 		}
+		addPositionWhenIsValid(positions, position.move(Direction.SOUTHEAST));
+		addPositionWhenIsValid(positions, position.move(Direction.SOUTHWEST));
 		
 		return positions;
 	}

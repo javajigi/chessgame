@@ -6,11 +6,14 @@ import pieces.PieceOperations;
 import pieces.Position;
 
 public class Board {
-	public static final String NEW_LINE = System.getProperty("line.separator");
 	public static final int ROW_SIZE = 8;
 	public static final int COLUMN_SIZE = 8;
 
 	List<Rank> ranks;
+	
+	public Board() {
+		this(new DefaultInitialize());
+	}
 
 	public Board(Initializable initializable) {
 		this.ranks = initializable.initialize();

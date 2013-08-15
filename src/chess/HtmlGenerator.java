@@ -1,5 +1,7 @@
 package chess;
 
+import static util.Constants.NEW_LINE;
+
 import java.util.List;
 
 import pieces.PieceOperations;
@@ -9,16 +11,16 @@ public class HtmlGenerator implements Generatable {
 	@Override
 	public String generateBoard(List<Rank> ranks) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("<html><head>" + Board.NEW_LINE);
-		sb.append("<script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>" + Board.NEW_LINE);
-		sb.append("<script src='/js/chessboard.js'></script>" + Board.NEW_LINE);
-		sb.append("</head>" + Board.NEW_LINE);
-		sb.append("<body>" + Board.NEW_LINE);
-		sb.append("<table id='boards'>" + Board.NEW_LINE);
+		sb.append("<html><head>" + NEW_LINE);
+		sb.append("<script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>" + NEW_LINE);
+		sb.append("<script src='/js/chessboard.js'></script>" + NEW_LINE);
+		sb.append("</head>" + NEW_LINE);
+		sb.append("<body>" + NEW_LINE);
+		sb.append("<table id='boards'>" + NEW_LINE);
 		for (int i = Board.ROW_SIZE; i > 0; i--) {
-			sb.append("<tr height='15'>" + Board.NEW_LINE);
-			sb.append(generateRank(ranks.get(i-1)) + Board.NEW_LINE);
-			sb.append("</tr>" + Board.NEW_LINE);
+			sb.append("<tr height='15'>" + NEW_LINE);
+			sb.append(generateRank(ranks.get(i-1)) + NEW_LINE);
+			sb.append("</tr>" + NEW_LINE);
 		}
 		sb.append("</table>");
 		sb.append("<br/>");
