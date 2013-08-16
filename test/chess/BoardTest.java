@@ -1,5 +1,7 @@
 package chess;
 
+import static util.Constants.NEW_LINE;
+
 import junit.framework.TestCase;
 import pieces.PieceFactory;
 import pieces.PieceOperations;
@@ -20,20 +22,20 @@ public class BoardTest extends TestCase {
 	
 	public void testPrint() throws Exception {
 		String expected = 
-			RankTest.BLACK_EXCEPT_PAWN_RANK + Board.NEW_LINE +
-			RankTest.BLACK_PAWN_RANK + Board.NEW_LINE +
+			RankTest.BLACK_EXCEPT_PAWN_RANK + NEW_LINE +
+			RankTest.BLACK_PAWN_RANK + NEW_LINE +
 			createEmptyRank() + 
 			createEmptyRank() + 
 			createEmptyRank() + 
 			createEmptyRank() +
-			RankTest.WHITE_PAWN_RANK + Board.NEW_LINE +
-			RankTest.WHITE_EXCEPT_PAWN_RANK + Board.NEW_LINE;
+			RankTest.WHITE_PAWN_RANK + NEW_LINE +
+			RankTest.WHITE_EXCEPT_PAWN_RANK + NEW_LINE;
 		System.out.println(board.generateBoard(new ConsoleGenerator()));
 		assertEquals(expected, board.generateBoard(new ConsoleGenerator()));
 	}
 	
 	private String createEmptyRank() {
-		return RankTest.EMPTY_RANK + Board.NEW_LINE;
+		return RankTest.EMPTY_RANK + NEW_LINE;
 	}
 	
 	public void testFindPiece() throws Exception {
