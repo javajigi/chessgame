@@ -37,6 +37,8 @@ public class HtmlGenerator implements Generatable {
 		sb.append("Target : <input id='target' type='text' /><br/>");
 		sb.append("<br/>");
 		sb.append("<a id='move' href=''><input type='button' href='' value='이동하기' / ></a>");
+		sb.append("<a href='/'><input type='button' href='' value='새로고침' / ></a>");
+		sb.append("<a href='/new'><input type='button' href='' value='새로운 게임' / ></a>");		
 		sb.append("</body></html>");
 		return sb.toString();
 	}
