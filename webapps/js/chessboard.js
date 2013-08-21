@@ -10,6 +10,7 @@ $(function(){
       		$('#target').val(position);
       	}
       	index++;
+      	return false;
     });
     
     $('#move').click(function() {
