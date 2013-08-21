@@ -10,9 +10,16 @@ public class Board {
 	public static final int COLUMN_SIZE = 8;
 
 	List<Rank> ranks;
+	
+	private Initializable initializable;
+	
+	public Board() {
+		this(new DefaultInitialize());
+	}
 
 	public Board(Initializable initializable) {
-		this.ranks = initializable.initialize();
+		this.initializable = initializable;
+		newGame();
 	}
 
 	PieceOperations findPiece(String xy) {
@@ -78,5 +85,9 @@ public class Board {
 
 	public String generateBoard(Generatable generator) {
 		return generator.generateBoard(ranks);
+	}
+	
+	public void newGame() {
+		this.ranks = initializable.initialize();
 	}
 }

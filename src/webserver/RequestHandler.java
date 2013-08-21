@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import chess.Board;
-import chess.HtmlGenerator;
+import chess.HtmlGenerator2;
 
 public class RequestHandler extends Thread {
 	private final static Logger log = Logger.getLogger(RequestHandler.class
@@ -46,13 +46,16 @@ public class RequestHandler extends Thread {
 			String requestPath = request.getRequestPath();
 
 			dos = new DataOutputStream(connection.getOutputStream());
-			if (requestPath.startsWith("/js")) {
-				processJavaScript(dos, requestPath);
+			if (requestPath.startsWith("/new")) {
+				board.newGame();
+				processChess(dos);
 			} else if (requestPath.startsWith("/move")) {
 				board.movePiece(request.getParameter("source"), request.getParameter("target"));
 				processChess(dos);
-			} else {
+			} else if (requestPath.equals("/")){
 				processChess(dos);
+			} else {
+				processFile(dos, requestPath);
 			}
 
 			connection.close();
@@ -62,14 +65,14 @@ public class RequestHandler extends Thread {
 	}
 
 	private void processChess(DataOutputStream dos) throws IOException {
-		String html = board.generateBoard(new HtmlGenerator());
+		String html = board.generateBoard(new HtmlGenerator2());
 		byte[] bytes = html.getBytes();
 		responseHtmlOk(dos, bytes.length);
 		dos.writeBytes("\r\n");
 		dos.write(bytes);
 	}
 
-	private void processJavaScript(DataOutputStream dos, String requestPath)
+	private void processFile(DataOutputStream dos, String requestPath)
 			throws FileNotFoundException, IOException {
 		File file = new File(DEFAULT_WEBAPPS_DIR + requestPath);
 		// 요청한 파일이 존재하는가?
