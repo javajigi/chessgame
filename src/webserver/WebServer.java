@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import chess.Board;
+
 public class WebServer {
 	private final static Logger log = Logger.getLogger(WebServer.class.getName());
 	
@@ -14,9 +16,10 @@ public class WebServer {
         log.log(Level.INFO, "WebServer Socket Created");
 
         // 클라이언트가 연결될때까지 대기한다.
+        Board board = new Board();
         Socket connection;
         while ((connection = listenSocket.accept()) != null) {
-        	RequestHandler requestHandler = new RequestHandler(connection);
+        	RequestHandler requestHandler = new RequestHandler(connection, board);
             requestHandler.start();
         }
         

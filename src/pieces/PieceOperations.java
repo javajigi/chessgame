@@ -3,6 +3,7 @@ package pieces;
 import java.util.List;
 
 import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 public interface PieceOperations {
 	char getSymbol();
@@ -12,4 +13,5 @@ public interface PieceOperations {
 	List<Position> getPossibleMoves();
 	boolean isEmpty();
 	Color getColor();
+	Type getType();
 }

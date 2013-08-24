@@ -3,6 +3,7 @@ package pieces;
 import java.util.ArrayList;
 import java.util.List;
 
+import pieces.Piece.Color;
 import chess.Board;
 
 public class Position {
@@ -89,5 +90,72 @@ public class Position {
 		if (y != other.y)
 			return false;
 		return true;
+	}
+
+	public static List<Position> findMiddlePosition(Position source, Position target) {
+		ArrayList<Position> middlePosition = new ArrayList<Position>();
+		ArrayList<Integer> middleX = new ArrayList<Integer>();
+		ArrayList<Integer> middleY = new ArrayList<Integer>();
+		int sourceX = source.getX();
+		int sourceY = source.getY();
+		int targetX = target.getX();
+		int targetY = target.getY();
+		
+		if(sourceX == targetX) {
+			middleY = findAllMiddleNum(sourceY, targetY);
+			for (Integer posY : middleY) {
+				middlePosition.add(new Position(sourceX, posY));
+			}
+		} else if(sourceY == targetY) {
+			middleX = findAllMiddleNum(sourceX, targetX);
+			for (Integer posX : middleX) {
+				middlePosition.add(new Position(posX, sourceY));
+			}
+		} else {
+			middleX = findAllMiddleNum(sourceX, targetX);
+			middleY = findAllMiddleNum(sourceY, targetY);
+			if(middleX.size() == middleY.size()) {
+				for (int i = 0; i < middleX.size(); i++) {
+					middlePosition.add(new Position(middleX.get(i), middleY.get(i)));
+				}
+			}
+		}
+		
+		return middlePosition;
+	}
+
+	private static ArrayList<Integer> findAllMiddleNum(int a, int b) {
+		ArrayList<Integer> middleNum = new ArrayList<Integer>();
+		int from = 0;
+		int to = 0;
+		
+		if (a > b) {
+			to = a;
+			from = b;
+		} else if (a < b) {
+			to = b;
+			from = a;
+		} else {
+			return middleNum;
+		}
+		
+		while(from+1 != to) {
+			middleNum.add(from+1);
+			from++;
+		}
+		
+		return middleNum;
+	}
+
+	public static List<Position> getPawnSidePositioin(Color color, Position source) {
+		List<Position> pawnSidePosition = new ArrayList<Position>();
+		if (color == Color.WHITE) {
+			pawnSidePosition.add(source.move(Direction.NORTHEAST));
+			pawnSidePosition.add(source.move(Direction.NORTHWEST));
+		} else {
+			pawnSidePosition.add(source.move(Direction.SOUTHEAST));
+			pawnSidePosition.add(source.move(Direction.SOUTHWEST));
+		}
+		return pawnSidePosition;
 	}
 }

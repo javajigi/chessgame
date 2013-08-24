@@ -31,7 +31,7 @@ public abstract class Piece implements PieceOperations {
 	}
 	
 	protected Color color;
-	private Type type;
+	protected Type type;
 	private Position position;
 	
 	Piece(Color color, Type type, Position position) {
@@ -96,6 +96,10 @@ public abstract class Piece implements PieceOperations {
 	@Override
 	public Color getColor() {
 		return color;
+	}
+	
+	public Type getType() {
+		return type;
 	}
 	
 	@Override

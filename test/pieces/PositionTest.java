@@ -72,5 +72,18 @@ public class PositionTest extends TestCase {
 		assertFalse(new Position(8, 0).isValid());
 	}
 	
+	public void testFindMiddlePosition() throws Exception {
+		Position source = new Position("a1");
+		Position target = new Position("a3");
+		assertEquals(1, Position.findMiddlePosition(source, target).size());
+
+		Position source2 = new Position("a1");
+		Position target2 = new Position("e1");
+		assertEquals(3, Position.findMiddlePosition(source2, target2).size());
+
+		Position source3 = new Position("a1");
+		Position target3 = new Position("d4");
+		assertEquals(2, Position.findMiddlePosition(source3, target3).size());
+	}
 	
 }

@@ -20,7 +20,7 @@ public class HtmlGenerator2 implements Generatable {
 			sb.append("</tr>" + NEW_LINE);
 		}
 		sb.append("</table>");
-		sb.append("</div> <div id='button'> <ul> <li>Source : <input id='source' type='text'> </li> <li>Target : <input id='target' type='text'> </li> <li><a id='move' href=''>Move</a></li> <li><a href='/'>Refresh</a></li> <li><a href='/new'>New</a></li> </ul> </div> </div> <img id='title' src='http://woogenius.dothome.co.kr/Chess/title.png'> </body> </html>");
+		sb.append("</div> <div id='button'> <ul> <li style='visibility:hidden'>Source : <input id='source' type='text'> </li> <li style='visibility:hidden'>Target : <input id='target' type='text'> </li><li><a href='/'>Refresh</a></li> <li><a href='/new'>New</a></li> </ul> </div> </div> <img id='title' src='http://woogenius.dothome.co.kr/Chess/title.png'> </body> </html>");
 		
 		return sb.toString();
 	}
