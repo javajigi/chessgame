@@ -6,7 +6,7 @@ import java.util.List;
 
 import pieces.PieceOperations;
 
-public class HtmlGenerator implements Generatable {
+public class HeejaeGenerator implements Generatable {
 
 	@Override
 	public String generateBoard(List<Rank> ranks) {

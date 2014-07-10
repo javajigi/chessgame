@@ -11,22 +11,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.text.Position;
-
-import pieces.Piece.Color;
 import chess.Board;
-import chess.DefaultInitialize;
-import chess.Generatable;
-import chess.HtmlGenerator;
-import chess.HtmlGenerator2;
-import chess.Initializable;
-import chess.Rank;
+import chess.JavajigiGenerator;
 
 public class RequestHandler extends Thread {
     private final static Logger log = Logger.getLogger(RequestHandler.class
@@ -57,7 +47,6 @@ public class RequestHandler extends Thread {
             // request message print
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
-            HttpRequest hr = new HttpRequest();
             String header = br.readLine();
             String path = header;	// get first line
             while(!"".equals(header) && !(header == null)) {
@@ -85,7 +74,6 @@ public class RequestHandler extends Thread {
 				}			
         	} else if (requestUrl.contains(".")) {
 				File requestFile = new File(DEFAULT_WEBAPPS_DIR + requestUrl);
-				DataOutputStream dos = new DataOutputStream(os);
 				fis = new FileInputStream(requestFile);
 				
 				int data = fis.read();
@@ -100,7 +88,7 @@ public class RequestHandler extends Thread {
 				board.init();
 			}
 
-            String HtmlString = board.generateBoard(new HtmlGenerator2());
+            String HtmlString = board.generateBoard(new JavajigiGenerator());
             os.write(HtmlString.getBytes());
             
             connection.close();
@@ -109,10 +97,6 @@ public class RequestHandler extends Thread {
         }
     }
     
-    private void responseHtmlOk(DataOutputStream dos, long contentsSize)    throws IOException {
-        responseOk(dos, contentsSize, "text/html");
-    }
-
     private void responseJavascriptOk(DataOutputStream dos, long contentsSize) throws IOException {
         responseOk(dos, contentsSize, "text/javascript");
     }

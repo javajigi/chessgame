@@ -6,7 +6,7 @@ import java.util.List;
 
 import pieces.PieceOperations;
 
-public class HtmlGenerator2 implements Generatable {
+public class WooginGenerator implements Generatable {
 
 	@Override
 	public String generateBoard(List<Rank> ranks) {

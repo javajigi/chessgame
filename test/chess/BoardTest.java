@@ -30,8 +30,8 @@ public class BoardTest extends TestCase {
 			createEmptyRank() +
 			RankTest.WHITE_PAWN_RANK + NEW_LINE +
 			RankTest.WHITE_EXCEPT_PAWN_RANK + NEW_LINE;
-		System.out.println(board.generateBoard(new ConsoleGenerator()));
-		assertEquals(expected, board.generateBoard(new ConsoleGenerator()));
+		System.out.println(board.generateBoard(new JavajigiGenerator()));
+		assertEquals(expected, board.generateBoard(new JavajigiGenerator()));
 	}
 	
 	private String createEmptyRank() {

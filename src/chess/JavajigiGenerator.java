@@ -4,7 +4,7 @@ import static util.Constants.NEW_LINE;
 
 import java.util.List;
 
-public class ConsoleGenerator implements Generatable {
+public class JavajigiGenerator implements Generatable {
 
 	@Override
 	public String generateBoard(List<Rank> ranks) {
