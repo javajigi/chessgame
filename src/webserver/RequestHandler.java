@@ -16,96 +16,98 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import chess.Board;
-import chess.JavajigiGenerator;
 
 public class RequestHandler extends Thread {
-    private final static Logger log = Logger.getLogger(RequestHandler.class
-            .getName());
+	private final static Logger log = Logger.getLogger(RequestHandler.class
+			.getName());
 
-    private static final String DEFAULT_WEBAPPS_DIR = "./webapps";
+	private static final String DEFAULT_WEBAPPS_DIR = "./webapps";
 
-    private Socket connection;
+	private Socket connection;
 
 	private FileInputStream fis;
 
 	private Board board;
 
-    public RequestHandler(Socket connection, Board board) {
-        this.connection = connection;
-        this.board = board;
-    }
+	public RequestHandler(Socket connection, Board board) {
+		this.connection = connection;
+		this.board = board;
+	}
 
-    public void run() {
-        log.log(Level.INFO, "WebServer Thread Created!");
-        InputStream is = null;
-        OutputStream os = null;
-        
-        try {
-            is = connection.getInputStream(); // 사용자 요청
-            os = connection.getOutputStream(); // 사용자 응답
+	public void run() {
+		log.log(Level.INFO, "WebServer Thread Created!");
+		InputStream is = null;
+		OutputStream os = null;
 
-            // request message print
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String header = br.readLine();
-            String path = header;	// get first line
-            while(!"".equals(header) && !(header == null)) {
-            	System.out.println(header);
-            	header = br.readLine();
-            }
-            
-            HttpRequest httpRequest = new HttpRequest();
-            if (path == null) {
-            	return;
-            }
-            
-        	String requestUrl = httpRequest.parseRequestUrl(path);
-        	
-            if (requestUrl.contains(".js")) {
+		try {
+			is = connection.getInputStream(); // 사용자 요청
+			os = connection.getOutputStream(); // 사용자 응답
+
+			// request message print
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String header = br.readLine();
+			String path = header; // get first line
+			while (!"".equals(header) && !(header == null)) {
+				System.out.println(header);
+				header = br.readLine();
+			}
+
+			HttpRequest httpRequest = new HttpRequest();
+			if (path == null) {
+				return;
+			}
+
+			String requestUrl = httpRequest.parseRequestUrl(path);
+
+			if (requestUrl.contains(".js")) {
 				File requestFile = new File(DEFAULT_WEBAPPS_DIR + requestUrl);
 				DataOutputStream dos = new DataOutputStream(os);
 				fis = new FileInputStream(requestFile);
 				responseJavascriptOk(dos, requestFile.length());
-        	
+
 				int data = fis.read();
-	        	while (data != -1) {
-	        		os.write(data);
-	        		data = fis.read();
-				}			
-        	} else if (requestUrl.contains(".")) {
+				while (data != -1) {
+					os.write(data);
+					data = fis.read();
+				}
+			} else if (requestUrl.contains(".")) {
 				File requestFile = new File(DEFAULT_WEBAPPS_DIR + requestUrl);
 				fis = new FileInputStream(requestFile);
-				
+
 				int data = fis.read();
-	        	while (data != -1) {
-	        		os.write(data);
-	        		data = fis.read();
-	        	}
-	        } else if (requestUrl.contains("move")) {
-				Map<String, String> move = httpRequest.parseParameters(requestUrl);
+				while (data != -1) {
+					os.write(data);
+					data = fis.read();
+				}
+			} else if (requestUrl.contains("move")) {
+				Map<String, String> move = httpRequest
+						.parseParameters(requestUrl);
 				board.movePiece(move.get("source"), move.get("target"));
 			} else if (requestUrl.contains("new")) {
 				board.init();
 			}
 
-            String HtmlString = board.generateBoard(new JavajigiGenerator());
-            os.write(HtmlString.getBytes());
-            
-            connection.close();
-        } catch (IOException e) {
-            log.log(Level.SEVERE, e.getMessage());
-        }
-    }
-    
-    private void responseJavascriptOk(DataOutputStream dos, long contentsSize) throws IOException {
-        responseOk(dos, contentsSize, "text/javascript");
-    }
+			String HtmlString = board.generateBoard();
+			os.write(HtmlString.getBytes());
 
-    private void responseOk(DataOutputStream dos, long contentsSize, String contentType)
-            throws IOException {
-        dos.writeBytes("HTTP/1.0 200 Document Follows " + NEW_LINE);
-        dos.writeBytes("Content-Type: " + contentType + ";charset=utf-8" + NEW_LINE);
-        dos.writeBytes("Content-Length: " + contentsSize + NEW_LINE);
-        dos.writeBytes(NEW_LINE);
-    }
+			connection.close();
+		} catch (IOException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		}
+	}
+
+	private void responseJavascriptOk(DataOutputStream dos, long contentsSize)
+			throws IOException {
+		responseOk(dos, contentsSize, "text/javascript");
+	}
+
+	private void responseOk(DataOutputStream dos, long contentsSize,
+			String contentType) throws IOException {
+		dos.writeBytes("HTTP/1.0 200 Document Follows " + NEW_LINE);
+		dos.writeBytes("Content-Type: " + contentType + ";charset=utf-8"
+				+ NEW_LINE);
+		dos.writeBytes("Content-Length: " + contentsSize + NEW_LINE);
+		dos.writeBytes(NEW_LINE);
+	}
 }

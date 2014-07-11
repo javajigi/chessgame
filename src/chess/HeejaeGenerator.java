@@ -6,9 +6,8 @@ import java.util.List;
 
 import pieces.PieceOperations;
 
-public class HeejaeGenerator implements Generatable {
+public class HeejaeGenerator {
 
-	@Override
 	public String generateBoard(List<Rank> ranks) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<html><head>" + NEW_LINE);

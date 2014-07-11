@@ -6,9 +6,7 @@ import java.util.List;
 
 import pieces.PieceOperations;
 
-public class WooginGenerator implements Generatable {
-
-	@Override
+public class WooginGenerator {
 	public String generateBoard(List<Rank> ranks) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<!DOCTYPE html> <html> <head> <meta charset=utf-8/> <title>WoogeniusChess</title> <link rel='stylesheet' type='text/css' href='http://woogenius.dothome.co.kr/Chess/style.css'> <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script> <script src='/js/chessboard.js'></script> </head> <body> <div id='wrap'> <div id='wideBorder'>");

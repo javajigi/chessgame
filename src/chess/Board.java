@@ -121,7 +121,8 @@ public class Board {
 		return sb.toString();
 	}
 
-	public String generateBoard(Generatable generator) {
+	public String generateBoard() {
+		JavajigiGenerator generator = new JavajigiGenerator();
 		return generator.generateBoard(ranks);
 	}
 
