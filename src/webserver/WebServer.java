@@ -11,7 +11,6 @@ public class WebServer {
 	private final static Logger log = Logger.getLogger(WebServer.class.getName());
 	
     public static void main(String argv[]) throws Exception {
-        // 서버소켓을 생성한다. 웹서버는 기본적으로 8888번 포트를 사용한다.
         ServerSocket listenSocket = new ServerSocket(8888);
         log.log(Level.INFO, "WebServer Socket Created");
 
